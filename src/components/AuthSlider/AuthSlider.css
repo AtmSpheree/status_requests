@@ -1,0 +1,19 @@
+.auth_slider__active {
+    color: var(--main-color-palette_text__white);
+    font-weight: 600;
+}
+
+.auth_slider__inactive {
+    color: var(--main-color-palette_text__black);
+    font-weight: 600;
+}
+
+.auth_slider_texts {
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    height: 45px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

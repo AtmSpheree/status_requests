@@ -1,0 +1,368 @@
+.submit_button {
+    background-color: var(--main-color-palette_accent);
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 400px;
+    outline: none;
+    border: none;
+    color: var(--main-color-palette_text__white);
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.home_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.sort_container_text {
+    font-family: 'NunitoSans', sans-serif;
+    color: var(--main-color-palette_text__black);
+    font-size: 20px;
+}
+
+.sort_container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sort_container__button {
+    padding: 5px 15px;
+    color: var(--main-color-palette_white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    transition: .1s ease-in-out;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.history_text, .history_error_text {
+    font-family: 'NunitoSans', sans-serif;
+    color: var(--main-color-palette_text__black);
+}
+
+.history_text {
+    font-weight: 600;
+    font-size: 32px;
+    text-align: center;
+}
+
+.history_error_text {
+    font-weight: 400;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.user_table {
+    width: calc(100% - 30px);
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px var(--main-color-palette_grey__light)
+}
+
+.user_table__rows {
+    overflow-y: auto;
+    max-height: 50vh;
+    height: 100%;
+    -ms-overflow-style: none;
+}
+
+.user_table__rows::-webkit-scrollbar {
+    width: 0;
+}
+
+.user_table__row_header, .user_table__row {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.user_table__row {
+    cursor: pointer;
+    transition: .1s ease-in-out;
+}
+
+.user_table__row:hover {
+    background-color: var(--main-color-palette_accent__light_hover);
+}
+
+.user_table__cell__type, .user_table__cell__price,
+.user_table__cell__datetime, .user_table__cell__warranty,
+.user_table__cell__status, .user_table__cell__type_header,
+.user_table__cell__price_header, .user_table__cell__datetime_header,
+.user_table__cell__warranty_header, .user_table__cell__status_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 40px);
+    min-height: 46px;
+}
+
+.user_table__cell__type, .user_table__cell__type_header {
+
+}
+
+.user_table__cell__price, .user_table__cell__price_header {
+    max-width: 150px;
+}
+
+.user_table__cell__datetime, .user_table__cell__datetime_header {
+    max-width: 160px;
+}
+
+.user_table__cell__warranty, .user_table__cell__warranty_header{
+    max-width: 200px;
+}
+
+.user_table__cell__status, .user_table__cell__status_header {
+    max-width: 170px;
+}
+
+.user_table__cell, .user_table__cell_header,
+.user_table__cell_green, .user_table__cell_red,
+.user_table__cell_yellow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 8px;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.content_container {
+    width: calc(100% - 30px);
+    max-width: 100%;
+}
+
+.user_table__cell, .user_table__cell_green,
+.user_table__cell_red, .user_table__cell_yellow {
+    hyphens: auto;
+    word-break: break-all;
+}
+
+.user_table__cell {
+    background-color: var(--main-color-palette_accent__light);
+}
+
+.user_table__cell_green {
+    background-color: var(--main-color-palette_green__light);
+}
+
+.user_table__cell_red {
+    background-color: var(--main-color-palette_red__light);
+}
+
+.user_table__cell_yellow {
+    background-color: var(--main-color-palette_yellow__light);
+}
+
+.user_table__cell_header {
+    background-color: var(--main-color-palette_accent);
+}
+
+.admin_table {
+    width: calc(100% - 30px);
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px var(--main-color-palette_grey__light)
+}
+
+.admin_table__rows {
+    overflow-y: auto;
+    max-height: 50vh;
+    height: 100%;
+    -ms-overflow-style: none;
+}
+
+.admin_table__rows::-webkit-scrollbar {
+    width: 0;
+}
+
+.admin_table__row_header, .admin_table__row {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.admin_table__row {
+    cursor: pointer;
+    transition: .1s ease-in-out;
+}
+
+.admin_table__row:hover {
+    background-color: var(--main-color-palette_grey__light_hover);
+}
+
+.admin_table__cell__type, .admin_table__cell__phone_number,
+.admin_table__cell__datetime, .admin_table__cell__username,
+.admin_table__cell__status, .admin_table__cell__type_header,
+.admin_table__cell__phone_number_header, .admin_table__cell__datetime_header,
+.admin_table__cell__username_header, .admin_table__cell__status_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 40px);
+    min-height: 46px;
+}
+
+.admin_table__cell__type, .admin_table__cell__type_header {
+    max-width: 200px;
+}
+
+.admin_table__cell__phone_number, .admin_table__cell__phone_number_header {
+    max-width: 170px;
+}
+
+.admin_table__cell__datetime, .admin_table__cell__datetime_header {
+    max-width: 160px;
+}
+
+.admin_table__cell__username, .admin_table__cell__username_header {
+
+}
+
+.admin_table__cell__status, .admin_table__cell__status_header {
+    max-width: 170px;
+}
+
+.admin_table__cell, .admin_table__cell_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.admin_table__cell {
+    color: var(--main-color-palette_text__black);
+    background-color: var(--main-color-palette_grey__light__second);
+}
+
+.admin_table__cell_header {
+    color: var(--main-color-palette_text__white);
+    background-color: var(--main-color-palette_black);
+}
+
+@media screen and (max-width: 800px) {
+    .admin_table, .user_table {
+        border: none;
+        padding: 0;
+        width: calc(100%)
+    }
+
+    .admin_table__rows, .user_table__rows {
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        max-height: 90vh;
+    }
+
+    .admin_table__row_header, .user_table__row_header {
+        display: none;
+    }
+
+    .admin_table__row, .user_table__row {
+        flex-direction: column;
+        border: solid 1px var(--main-color-palette_grey__light)
+    }
+
+    .user_table__cell__price, .user_table__cell__price_header {
+        max-width: none;
+    }
+
+    .user_table__cell__datetime, .user_table__cell__datetime_header {
+        max-width: none;
+    }
+
+    .user_table__cell__warranty, .user_table__cell__warranty_header{
+        max-width: none;
+    }
+
+    .user_table__cell__status, .user_table__cell__status_header {
+        max-width: none;
+    }
+
+    .admin_table__cell__type, .admin_table__cell__type_header {
+        max-width: none;
+    }
+
+    .admin_table__cell__phone_number, .admin_table__cell__phone_number_header {
+        max-width: none;
+    }
+
+    .admin_table__cell__datetime, .admin_table__cell__datetime_header {
+        max-width: none;
+    }
+
+    .admin_table__cell__username, .admin_table__cell__username_header {
+
+    }
+
+    .admin_table__cell__status, .admin_table__cell__status_header {
+        max-width: none;
+    }
+
+    .admin_table__cell__type, .admin_table__cell__phone_number,
+    .admin_table__cell__datetime, .admin_table__cell__username,
+    .admin_table__cell__status, .admin_table__cell__type_header,
+    .admin_table__cell__phone_number_header, .admin_table__cell__datetime_header,
+    .admin_table__cell__username_header, .admin_table__cell__status_header {
+        width: 100%;
+    }
+
+    .user_table__cell__type, .user_table__cell__price,
+    .user_table__cell__datetime, .user_table__cell__warranty,
+    .user_table__cell__status, .user_table__cell__type_header,
+    .user_table__cell__price_header, .user_table__cell__datetime_header,
+    .user_table__cell__warranty_header, .user_table__cell__status_header {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .submit_button {
+        font-size: 25px;
+        width: 100%;
+    }
+}

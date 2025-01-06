@@ -1,0 +1,56 @@
+.default_select_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 5px;
+    width: 100%;
+    position: relative;
+}
+
+.default_select_label {
+    color: var(--main-color-palette_text__black);
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.custom_select {
+    width: 100%;
+}
+
+.custom_select select {
+    appearance: none;
+    outline: none;
+    width: 100%;
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 18px;
+    padding: 15px 6px;
+    border: solid 2px var(--main-color-palette_grey__light);
+    border-radius: 5px;
+    color: var(--main-color-palette_text__black);
+    cursor: pointer;
+}
+
+.custom_select::before,
+.custom_select::after {
+    --size: 5px;
+    position: absolute;
+    content: "";
+    right: 15px;
+    pointer-events: none;
+}
+
+.custom_select::before {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid var(--main-color-palette_text__black);
+    top: 60%;
+}
+
+.custom_select::after {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid var(--main-color-palette_text__black);;
+    top: 70%;
+}

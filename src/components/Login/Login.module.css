@@ -1,0 +1,92 @@
+.form_container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 414px;
+}
+
+.add_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.add_block_forgot_password {
+    color: var(--main-color-palette_accent);
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.submit_button {
+    background-color: var(--main-color-palette_accent);
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: var(--main-color-palette_text__white);
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.add_text_block {
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.add_text_block p {
+    color: var(--main-color-palette_text__black);
+}
+
+.add_text_block a {
+    color: var(--main-color-palette_accent);
+    text-decoration: none;
+}
+
+.error_text {
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+    color: var(--main-color-palette_negative__light);
+}
+
+@media screen and (max-width: 444px) {
+    .form_container {
+        width: calc(100% - 15px)
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .add_block {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .submit_button {
+        margin-top: 15px;
+    }
+}

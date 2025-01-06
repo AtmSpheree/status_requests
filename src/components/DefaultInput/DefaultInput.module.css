@@ -1,0 +1,51 @@
+.default_input_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 5px;
+    width: 100%;
+    position: relative;
+}
+
+.default_input {
+    color: var(--main-color-palette_text__black);
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 18px;
+    outline: none;
+    border: solid 2px var(--main-color-palette_grey__light);
+    border-radius: 5px;
+    padding: 15px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: .1s ease-in-out;
+}
+
+.default_input_label {
+    color: var(--main-color-palette_text__black);
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.default_input:focus, .default_input:valid {
+    border: solid 2px var(--main-color-palette_accent__light);
+}
+
+.password_show_img {
+    height: 50%;
+    position: absolute;
+    bottom: 5%;
+    right: 1%;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 434px) {
+    .default_input {
+        font-size: 16px;
+    }
+
+    .default_input_label {
+        font-size: 18px;
+    }
+}

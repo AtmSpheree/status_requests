@@ -1,0 +1,51 @@
+.header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 50px);
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.profile_img {
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+}
+
+.header_subcontainer, .header_subcontainer_menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logout_button {
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    cursor: pointer;
+    color: var(--main-color-palette_text__white);
+    background-color: var(--main-color-palette_accent);
+    padding: 7px 12px;
+    border-radius: 7px;
+}
+
+.header_admin_mark {
+    font-family: 'NunitoSans', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--main-color-palette_accent)
+}
+
+@media screen and (max-width: 750px) {
+    .header_container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header_subcontainer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

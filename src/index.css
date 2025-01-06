@@ -1,0 +1,137 @@
+:root {
+  --main-color-palette_accent: #2ca0a0;
+  --main-color-palette_accent__light: #7fd2d2;
+  --main-color-palette_accent__light_hover: rgba(127, 210, 210, 0.2);
+  --main-color-palette_grey__light_hover: rgba(202, 202, 202, 0.1);
+  --main-color-palette_negative__light: #ff4a4a;
+  --main-color-palette_grey__light: #cacaca;
+  --main-color-palette_grey__light__second: #F0F0F0;
+  --main-color-palette_green: #40C044;
+  --main-color-palette_green__light: #76ff8f;
+  --main-color-palette_red__light: #ff7676;
+  --main-color-palette_yellow__light: #ffda76;
+  --main-color-palette_white: white;
+  --main-color-palette_black: black;
+  --main-color-palette_text__white: white;
+  --main-color-palette_text__black: black;
+  --main-color-palette_close_cross__hover: rgba(0, 0, 0, 0.1)
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'NunitoSans',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+@font-face {
+  font-family: "NunitoSans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/NunitoSans_10pt-Regular.ttf")
+}
+
+@font-face {
+  font-family: "NunitoSans";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/fonts/NunitoSans_10pt-SemiBold.ttf")
+}
+
+@font-face {
+  font-family: "NunitoSans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/NunitoSans_10pt-Bold.ttf")
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+#root {
+  width: 100%;
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.invisible_submit {
+  display: none;
+}
+
+.loader_wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 5px dotted #FFF;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.logo_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 306px;
+  cursor: pointer;
+}
+
+.status_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 51px;
+  min-height: 51px;
+  background-color: var(--main-color-palette_accent);
+  border-radius: 4px;
+}
