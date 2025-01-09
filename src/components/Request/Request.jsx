@@ -180,7 +180,7 @@ const Request = () => {
         if (dataContext.data?.requests[i].id === params.id) {
           setRequest(dataContext.data?.requests[i]);
           setWarrantyPeriod(dataContext.data?.requests[i].warranty_period)
-          setStatus(compareStatusReverse(dataContext.data?.requests[i].status))
+          setStatus(compareStatus(dataContext.data?.requests[i].status).status)
           return;
         }
       }
@@ -232,7 +232,6 @@ const Request = () => {
     document.body.style.position = "static";
     document.body.style.top = `0`;
     if (value !== "0px") {
-      console.log(value)
       window.scrollTo(0, value)
     }
   }
@@ -339,7 +338,7 @@ const Request = () => {
                     onClick={(e) => {
                       setIsStatusChanging(false);
                       setError(false);
-                      setStatus(request.status);
+                      setStatus(compareStatus(request.status).status);
                       closeWindowWrapper();
                     }}
                   >

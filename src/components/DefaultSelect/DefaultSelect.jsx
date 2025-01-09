@@ -9,6 +9,7 @@ const DefaultSelect = (props) => {
 
   useEffect(() => {
     if (props.value !== undefined) {
+      console.log(props.value)
       setValue(props.value)
     }
   }, [props.value]);

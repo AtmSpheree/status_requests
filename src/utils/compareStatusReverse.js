@@ -1,5 +1,5 @@
 const compareStatusReverse = (status) => {
-  if (status === "Ождиает") {
+  if (status === "Ожидает") {
     return "waiting"
   } else if (status === "В работе") {
     return "at work"
