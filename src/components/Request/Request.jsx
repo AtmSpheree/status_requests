@@ -25,10 +25,13 @@ const Request = () => {
 
   const [isWarrantyPeriodChanging, setIsWarrantyPeriodChanging] = useState(false);
   const [isStatusChanging, setIsStatusChanging] = useState(false);
+  const [isPriceChanging, setIsPriceChanging] = useState(false);
   const [warrantyPeriodError, setWarrantyPeriodError] = useState(false);
   const [statusError, setStatusError] = useState(false);
+  const [priceError, setPriceError] = useState(false);
   const [warrantyPeriod, setWarrantyPeriod] = useState("");
   const [status, setStatus] = useState("");
+  const [price, setPrice] = useState("");
   const [error, setError] = useState(null);
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [isCanRefresh, setIsCanRefresh] = useState(null);
@@ -61,6 +64,18 @@ const Request = () => {
     }
   }
 
+  const onPriceChange = (value) => {
+    if (value > 1000000) {
+      setPriceError("Цена возможна до 1 миллиона");
+      return
+    } else if (value < 0) {
+      setPriceError("Цена не может быть отрицательной")
+      return
+    }
+    setPriceError(false);
+    setPrice(value);
+  }
+
   const onWarrantyPeriodChange = (value) => {
     setWarrantyPeriodError(false);
     setWarrantyPeriod(value);
@@ -69,6 +84,20 @@ const Request = () => {
   const onStatusChange = (value) => {
     setStatusError(false);
     setStatus(value);
+  }
+
+  const onPriceChangeClick = () => {
+    if (isFormLoading === true) {
+      return;
+    }
+
+    if (price === request.price) {
+      setPriceError("Должно содержать цену");
+      return;
+    }
+
+    setPriceError(false)
+    onPriceChangeSubmit();
   }
 
   const onWarrantyPeriodChangeClick = () => {
@@ -99,6 +128,40 @@ const Request = () => {
     onStatusChangeSubmit();
   }
 
+  const onPriceChangeSubmit = async () => {
+    setIsFormLoading(true);
+    setError(null);
+    try {
+      const fetchedData = await putRequests({
+        warranty_period: request.warranty_period,
+        status: request.status,
+        price: price,
+        email: request.email
+      }, dataContext.data?.auth.access_token, request.id);
+      setRequest({...request, price: price})
+      dataContext.setData({
+        ...dataContext.data,
+        requests: dataContext.data?.requests.map((item) => (
+          item.id === request.id ? {...request, price: price} : item
+        ))
+      })
+      setIsPriceChanging(false);
+      closeWindowWrapper();
+      setIsCanRefresh(null);
+      setIsFormLoading(false);
+    } catch (e) {
+      let norm_e = normalizeError(e)
+      if (norm_e.status === 403) {
+        setIsCanRefresh("price");
+        refreshHook.refresh();
+      } else {
+        console.log(norm_e)
+        setError("Ошибка со стороны сервера")
+        setIsFormLoading(false);
+      }
+    }
+  }
+
   const onWarrantyPeriodChangeSubmit = async () => {
     setIsFormLoading(true);
     setError(null);
@@ -106,6 +169,7 @@ const Request = () => {
       const fetchedData = await putRequests({
         warranty_period: warrantyPeriod,
         status: request.status,
+        price: request.price,
         email: request.email
       }, dataContext.data?.auth.access_token, request.id);
       setRequest({...request, warranty_period: warrantyPeriod})
@@ -139,6 +203,7 @@ const Request = () => {
       const fetchedData = await putRequests({
         warranty_period: request.warranty_period,
         status: compareStatusReverse(status),
+        price: request.price,
         email: request.email
       }, dataContext.data?.auth.access_token, request.id);
       setRequest({...request, status: compareStatusReverse(status)})
@@ -170,6 +235,8 @@ const Request = () => {
         onWarrantyPeriodChangeSubmit();
       } else if (isCanRefresh === "status") {
         onStatusChangeSubmit();
+      } else if (isCanRefresh === "price") {
+        onPriceChangeSubmit();
       }
     }
   }, [dataContext.data?.auth?.access_token])
@@ -179,8 +246,9 @@ const Request = () => {
       for (let i = 0; i < dataContext.data?.requests.length; i++) {
         if (dataContext.data?.requests[i].id === params.id) {
           setRequest(dataContext.data?.requests[i]);
-          setWarrantyPeriod(dataContext.data?.requests[i].warranty_period)
-          setStatus(compareStatus(dataContext.data?.requests[i].status).status)
+          setWarrantyPeriod(dataContext.data?.requests[i].warranty_period);
+          setStatus(compareStatus(dataContext.data?.requests[i].status).status);
+          setPrice(dataContext.data?.requests[i].price);
           return;
         }
       }
@@ -218,11 +286,11 @@ const Request = () => {
   }, [dataContext.data?.auth?.access_token]);
 
   useEffect(() => {
-    if (isWarrantyPeriodChanging === true || isStatusChanging === true) {
+    if (isWarrantyPeriodChanging === true || isStatusChanging === true || isPriceChanging === true) {
       document.body.style.top = `-${window.scrollY}px`;
       document.body.style.position = "fixed";
     }
-  }, [isStatusChanging, isWarrantyPeriodChanging])
+  }, [isStatusChanging, isWarrantyPeriodChanging, isPriceChanging])
 
   const closeWindowWrapper = () => {
     let value = "0px";
@@ -245,6 +313,88 @@ const Request = () => {
     :
       (isIdValid ?
           <div className={styles.content_container}>
+            <div
+              className={styles.admin_changing_wrapper__upper}
+              style={{display: isPriceChanging ? "flex" : "none"}}
+            >
+              <div
+                className={styles.admin_changing_wrapper}
+              >
+                <div className={styles.admin_changing_container}>
+                  <button
+                    className={styles.close_cross_button}
+                    onClick={(e) => {
+                      setIsPriceChanging(false);
+                      setError(false);
+                      setPrice(request.price);
+                      closeWindowWrapper();
+                    }}
+                  >
+                  <span className={styles.close_cross}>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="20"
+                         height="20" className="g-icon" fill="currentColor" stroke="none" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+                        <path fill="currentColor" fillRule="evenodd"
+                              d="M3.47 3.47a.75.75 0 0 1 1.06 0L8 6.94l3.47-3.47a.75.75 0 1 1 1.06 1.06L9.06 8l3.47 3.47a.75.75 0 1 1-1.06 1.06L8 9.06l-3.47 3.47a.75.75 0 0 1-1.06-1.06L6.94 8 3.47 4.53a.75.75 0 0 1 0-1.06"
+                              clipRule="evenodd"></path>
+                      </svg>
+                    </svg>
+                  </span>
+                  </button>
+                  <DefaultInput
+                    textareaId={"default_input_admin_request_warranty_period"}
+                    isRequired={true}
+                    label={"Введите гарантию"}
+                    inputStyles={(priceError === false) ?
+                      {border: "solid 2px var(--main-color-palette_accent__light)"}
+                      :
+                      (priceError !== null ?
+                          {border: "solid 2px var(--main-color-palette_negative__light)"}
+                          :
+                          {}
+                      )
+                    }
+                    value={price}
+                    min={0}
+                    max={1000000}
+                    type={"number"}
+                    onChange={onPriceChange}
+                  />
+                  <DefaultCheckbox
+                    isUserCheckable={false}
+                    styles={{
+                      width: "100%",
+                      display: (priceError === false) ? "none" : "flex",
+                    }}
+                    label={"Должно содержать гарантию"}
+                    color={
+                      (priceError === false) ?
+                        "var(--main-color-palette_accent)"
+                        :
+                        "var(--main-color-palette_negative__light)"
+                    }
+                    checked={
+                      (priceError === false)
+                    }
+                    inputId={"default_checkbox_admin_request_warranty_period_error"}
+                  />
+                  <div
+                    className={styles.submit_button}
+                    onClick={onPriceChangeClick}
+                  >
+                    {isFormLoading && <span className={"loader"}></span>}
+                    <p>Изменить</p>
+                  </div>
+                  {error !== null &&
+                    <p
+                      className={styles.error_text}
+                    >
+                      {error}
+                    </p>
+                  }
+                </div>
+              </div>
+            </div>
             <div
               className={styles.admin_changing_wrapper__upper}
               style={{display: isWarrantyPeriodChanging ? "flex" : "none"}}
@@ -277,7 +427,7 @@ const Request = () => {
                     textareaId={"default_input_admin_request_warranty_period"}
                     isRequired={true}
                     label={"Введите гарантию"}
-                    textareaStyles={(warrantyPeriodError === false) ?
+                    inputStyles={(warrantyPeriodError === false) ?
                       {border: "solid 2px var(--main-color-palette_accent__light)"}
                       :
                       (warrantyPeriodError === true ?
@@ -607,18 +757,6 @@ const Request = () => {
                       </div>
                     </div>
                     <div className={styles.request_admin_table__row}>
-                      <div className={styles.request_admin_table__cell__price_header}>
-                        <div className={styles.request_admin_table__cell_header}>
-                          Цена
-                        </div>
-                      </div>
-                      <div className={styles.request_admin_table__cell__price}>
-                        <div className={styles.request_admin_table__cell}>
-                          {request.price}
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.request_admin_table__row}>
                       <div className={styles.request_admin_table__cell__datetime_header}>
                         <div className={styles.request_admin_table__cell_header}>
                           Дата заказа
@@ -627,6 +765,29 @@ const Request = () => {
                       <div className={styles.request_admin_table__cell__datetime}>
                         <div className={styles.request_admin_table__cell}>
                           {formatDate(request.datetime)}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.request_admin_table__row}>
+                      <div className={styles.request_admin_table__cell__price_header}>
+                        <div
+                          className={styles.request_admin_table__cell_header}
+                          onClick={(e) => setIsPriceChanging(!isPriceChanging)}
+                        >
+                          Цена
+                          <svg aria-hidden="true" display="block"
+                               width="24" height="24" viewBox="0 0 24 24" style={{width: 24, height: 24}}>
+                            <g fill="none" fillRule="evenodd">
+                              <path d="M0 0h24v24H0z"></path>
+                              <path fill="currentColor"
+                                    d="m14.188 6.273 3.54 3.54-8.624 8.622a6.7 6.7 0 0 1-2.77 1.664l-2.903.886a.334.334 0 0 1-.416-.416l.886-2.902a6.7 6.7 0 0 1 1.664-2.771zm1.061-1.06 1.769-1.77a1.5 1.5 0 0 1 2.121 0l1.418 1.419a1.5 1.5 0 0 1 0 2.121L18.79 8.752z"></path>
+                            </g>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className={styles.request_admin_table__cell__price}>
+                        <div className={styles.request_admin_table__cell}>
+                          {request.price} Р
                         </div>
                       </div>
                     </div>

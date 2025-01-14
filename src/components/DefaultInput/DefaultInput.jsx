@@ -40,6 +40,8 @@ const DefaultInput = (props) => {
       style={props.inputStyles ?? {}}
       maxLength={props.maxLength ?? null}
       minLength={props.minLength ?? null}
+      max={props.max ?? null}
+      min={props.min ?? null}
       required={props.isRequired ?? false}
     />
     {(props.type === "password" && value !== "") && (
@@ -71,6 +73,8 @@ DefaultInput.props = {
   maxLength: undefined,
   minlength: undefined,
   value: undefined,
+  max: undefined,
+  min: undefined,
 }
 
 export default DefaultInput
