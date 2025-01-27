@@ -1,0 +1,190 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  version: 1.0.0
+servers:
+- url: **YOUR API URL**
+x-yc-apigateway:
+  cors:
+    origin: '**YOUR REACT SERVING SERVER URL**'
+    methods: '*'
+    allowHeaders: '*'
+paths:
+  /login/{token}:
+    post:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: token
+        explode: false
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+        style: simple
+  /register/{token}:
+    post:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: token
+        explode: false
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+        style: simple
+  /confirm_register/{token_data}:
+    post:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: token_data
+        explode: false
+        in: path
+        name: token_data
+        required: true
+        schema:
+          type: string
+        style: simple
+  /refresh_token:
+    post:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+  /reset_password_query/{token}:
+    post:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: token
+        explode: false
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+        style: simple
+  /reset_password/{identificator}:
+    post:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: identificator
+        explode: false
+        in: path
+        name: identificator
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: identificator
+        explode: false
+        in: path
+        name: identificator
+        required: true
+        schema:
+          type: string
+        style: simple
+  /profile:
+    get:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      security:
+      - bearerAuth: []
+  /requests:
+    get:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      security:
+      - bearerAuth: []
+  /requests/{token}:
+    post:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: token
+        explode: false
+        in: path
+        name: token
+        required: true
+        schema:
+          type: string
+        style: simple
+      security:
+      - bearerAuth: []
+  /requests/{request_id}:
+    put:
+      x-yc-apigateway-integration:
+        payload_format_version: '1.0'
+        function_id: **YOUR MAIN API FUNCTION ID**
+        tag: $latest
+        type: cloud_functions
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+      parameters:
+      - description: request_id
+        explode: false
+        in: path
+        name: request_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      x-yc-apigateway-authorizer:
+        type: function
+        function_id: **YOUR API AUTH FUNCTION ID**
+        tag: $latest
+        service_account_id: **YOUR SERVICE ACCOUNT ID**
+        authorizer_result_ttl_in_seconds: 300
+      scheme: bearer
+      type: http
