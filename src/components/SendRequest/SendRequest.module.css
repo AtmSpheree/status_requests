@@ -83,3 +83,9 @@
     cursor: pointer;
     color: var(--main-color-palette_accent)
 }
+
+@media screen and (max-width: 460px) {
+    .form_container {
+        width: calc(100% - 15px);
+    }
+}
