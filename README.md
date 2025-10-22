@@ -12,7 +12,7 @@ A web application for creating and processing repair requests
 
 ## Tech Stack
 
-**Client:** React, Redux
+**Client:** React, Axios, yandex/smart-captcha
 
 **Server:** Yandex Cloud
 
@@ -22,6 +22,7 @@ A web application for creating and processing repair requests
 - Cloud functions (main handler and api-token authorization functions, written in Python)
 - Object Storage (The static build of the application is being maintained)
 - Managed Service for YDB (see the database structure below)
+- Yandex Smart Captcha
 ## Server configuration
 ### I chose Yandex Cloud as the server, but you can choose another one. On my part, a RESTful API and the ability to work with the database were implemented. You will also need 12 variables:
 - #### "TOKEN_SECRET" - it contains a randomly generated Fernet key and is used to create new API keys to implement the authorization feature.
